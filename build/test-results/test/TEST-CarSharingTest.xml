@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CarSharingTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-03-14T23:04:56" hostname="MacBook-Pro.local" time="0.232">
+  <properties/>
+  <testcase name="start" classname="CarSharingTest" time="0.232"/>
+  <system-out><![CDATA[?[1;31m
+Start test 1?[0m
+?[1;31m
+Start test 2?[0m
+?[1;31m
+Start test 3?[0m
+?[1;31m
+Start test 4?[0m
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
