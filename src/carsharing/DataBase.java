@@ -6,9 +6,10 @@ import java.util.List;
 
 public class DataBase {
 
-    private final String url = "jdbc:h2:/Users/alex/IdeaProjects/jetBrains/Car Sharing/Car Sharing/task/src/carsharing/db/carsharing.mv.db";
+    private String url = "jdbc:h2:/Users/alex/IdeaProjects/jetBrains/Car Sharing/Car Sharing/task/src/carsharing/db/";
 
-    public void initDB() {
+    public void initDB(String dataBase) {
+        url +=dataBase;
         try (Connection conn = DriverManager.getConnection(url)){
             Class.forName ("org.h2.Driver");
             Statement st = conn.createStatement();
@@ -55,6 +56,7 @@ public class DataBase {
         try (Connection conn = DriverManager.getConnection(url)){
             Statement st = conn.createStatement();
             st.execute(queryAddCompany);
+            Console.write("The company was created!");
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }

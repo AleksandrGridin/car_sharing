@@ -2,10 +2,10 @@ package carsharing;
 
 public class Menu {
 
-    private static DataBase dataBase = new DataBase();
+    private DataBase dataBase = new DataBase();
 
-    public Menu() {
-        dataBase.initDB();
+    public Menu(String base) {
+        dataBase.initDB(base);
     }
 
     public void mainMenu() {
