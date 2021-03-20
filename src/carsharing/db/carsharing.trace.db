@@ -1,6 +1,0 @@
-2021-03-16 16:14:57 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
-CREATE TABLE COMPANY (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR UNIQUE NOT NULL); [42101-200]
-2021-03-16 16:14:58 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
-CREATE TABLE COMPANY (ID INT PRIMARY KEY AUTO_INCREMENT, NAME VARCHAR UNIQUE NOT NULL); [42101-200]
