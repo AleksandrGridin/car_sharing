@@ -14,7 +14,7 @@ public class DataBase {
 
     private final String dropIfExist = "DROP TABLE IF EXISTS COMPANY;";
 
-    private final String listOfCompanies = "SELECT * FROM COMPANY;";
+    private final String listOfCompanies = "SELECT ROW_NUMBER() over (ORDER BY ID) rowNumber, ID, NAME FROM COMPANY;";
 
     private final String createTableOfCompanies =  "CREATE TABLE COMPANY\n" +
             "(\n" +
@@ -27,6 +27,7 @@ public class DataBase {
             "    ID INT PRIMARY KEY AUTO_INCREMENT,\n" +
             "    NAME VARCHAR UNIQUE NOT NULL,\n" +
             "    COMPANY_ID INT NOT NULL,\n" +
+            "    RENTED BOOLEAN NULL," +
             "    FOREIGN KEY (COMPANY_ID) REFERENCES COMPANY(ID)\n" +
             ");";
 
@@ -63,7 +64,7 @@ public class DataBase {
 
             ResultSet resultSet = st.executeQuery(listOfCompanies);
             while (resultSet.next()) {
-                Company company =  new Company(resultSet.getInt(1),resultSet.getString(2));
+                Company company =  new Company(resultSet.getInt(1),resultSet.getInt(2), resultSet.getString(3));
                 companies.add(company);
             }
         } catch (SQLException throwable) {
@@ -94,7 +95,8 @@ public class DataBase {
 
             ResultSet resultSet = st.executeQuery("SELECT ROW_NUMBER() over (ORDER BY ID)" +
                     " row_numb, NAME, COMPANY_ID  " +
-                    "FROM CAR WHERE CAR.COMPANY_ID = " + id + ";");
+                    "FROM CAR WHERE CAR.COMPANY_ID = " + id + " AND (RENTED = FALSE OR RENTED IS NULL);");
+
             while (resultSet.next()) {
                 Car car =  new Car(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3));
                 cars.add(car);
@@ -104,23 +106,6 @@ public class DataBase {
         }
         return cars;
     }
-
-//    public List<Car> listOfCars() {
-//
-//        List<Car> cars = new ArrayList<>();
-//        try (Connection conn = DriverManager.getConnection(url);
-//             Statement st = conn.createStatement()){
-//
-//            ResultSet resultSet = st.executeQuery("SELECT * FROM CAR");
-//            while (resultSet.next()) {
-//                Car car =  new Car(resultSet.getInt(1), resultSet.getString(2), resultSet.getInt(3));
-//                cars.add(car);
-//            }
-//        } catch (SQLException throwable) {
-//            throwable.printStackTrace();
-//        }
-//        return cars;
-//    }
 
     public void addCar(String name, int companyID) {
         String queryAddCompany = "INSERT INTO CAR (NAME, COMPANY_ID) VALUES ( '" + name + "', "+ companyID + " );";
@@ -207,6 +192,21 @@ public class DataBase {
                         "WHERE ID = "+ customerID +";";
             }
             st.executeUpdate(updateCustomerQuery);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void updateCar(int carID, boolean returnOrRent) {
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement st = conn.createStatement()) {
+
+            String updateCarQuery = "UPDATE CAR " +
+                    "SET RENTED = "+ returnOrRent +" " +
+                    "WHERE ID = "+ carID +";";
+
+            st.executeUpdate(updateCarQuery);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

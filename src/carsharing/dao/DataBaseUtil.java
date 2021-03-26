@@ -1,6 +1,5 @@
 package carsharing.dao;
 
-import carsharing.Console;
 import carsharing.items.Car;
 import carsharing.items.Company;
 import carsharing.items.Customer;
@@ -53,5 +52,9 @@ public class DataBaseUtil {
 
     public void updateCustomer(int customerID, int carID) {
         dataBase.updateCustomer(customerID, carID);
+    }
+
+    public void updateCar(int carID, boolean returnOrRent) {
+        dataBase.updateCar(carID, returnOrRent);
     }
 }

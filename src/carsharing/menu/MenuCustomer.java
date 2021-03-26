@@ -33,7 +33,11 @@ public class MenuCustomer {
             Console.write("You didn't rent a car!");
         } else {
             Car car = dataBaseUtil.getCar(customer.getCarID());
-            Company company = dataBaseUtil.getCompany(car.getCompanyID());
+            Company company = dataBaseUtil.listOfCompanies()
+                    .stream()
+                    .filter(x -> x.getID() == car.getCompanyID())
+                    .findAny()
+                    .get();
             Console.write("Your rented car:");
             Console.write(car.getName());
             Console.write("Company:");
@@ -46,6 +50,7 @@ public class MenuCustomer {
         if (customer.getCarID() == 0) {
             Console.write("You didn't rent a car!\n");
         } else {
+            dataBaseUtil.updateCar(customer.getCarID(), false);
             dataBaseUtil.updateCustomer(customer.getID(), 0);
             customer.setCarID(0);
             Console.write("You've returned a rented car!\n");
@@ -66,6 +71,7 @@ public class MenuCustomer {
                 customer.setCarID(car.get().getID());
                 Console.write("You rented '" + car.get().getName() + "'");
                 dataBaseUtil.updateCustomer(customer.getID(), car.get().getID());
+                dataBaseUtil.updateCar(car.get().getID(), true);
             } else {
                 return;
             }
