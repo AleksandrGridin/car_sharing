@@ -3,6 +3,7 @@ package carsharing.dao;
 import carsharing.Console;
 import carsharing.items.Car;
 import carsharing.items.Company;
+import carsharing.items.Customer;
 
 import java.util.List;
 
@@ -14,43 +15,43 @@ public class DataBaseUtil {
         dataBase.initDB(nameDB);
     }
 
-    public boolean createCompany(String name) {
-        return dataBase.createCompany(name);
+    public void addCompany(String name) {
+        dataBase.createCompany(name);
     }
 
-    public Company listOfCompanies() {
-        List<Company> companies = dataBase.listOfCompanies();
-        if (companies.isEmpty()) {
-            Console.write("The company list is empty!");
-        } else {
-            Console.write("Choose the company:");
-            companies.forEach(System.out::println);
-            Console.write("0. Back");
-            return getCompany(companies);
-        }
-        return null;
+    public List<Company> listOfCompanies() {
+        return dataBase.listOfCompanies();
     }
 
-    private Company getCompany(List<Company> listOfCompanies) {
-        int company = Integer.parseInt(Console.read());
-        if (company == 0) {
-            return null;
-        }
-        return listOfCompanies.get(company - 1);
+    public Company getCompany(int currentRowNumber) {
+        return dataBase.listOfCompanies().get(currentRowNumber - 1);
     }
 
-    public void listOfCars(int id) {
-        List<Car> cars = dataBase.listOfCars(id);
-        if (cars.isEmpty()) {
-            Console.write("The car list is empty!");
-        } else {
-            Console.write("Car list:");
-            cars.forEach(System.out::println);
-        }
+    public List<Car> listOfCars(int company_id) {
+        return dataBase.listOfCars(company_id);
     }
 
+    public void addCar(String read, int companyID) {
+        dataBase.addCar(read, companyID);
+    }
 
-    public boolean addCar(String read, int companyID) {
-        return dataBase.addCar(read, companyID);
+    public Car getCar(int carID) {
+        return dataBase.getCar(carID);
+    }
+
+    public boolean addCustomer(String nameOfCustomer) {
+        return dataBase.createCustomer(nameOfCustomer);
+    }
+
+    public List<Customer> listOfCustomers() {
+        return dataBase.listOfCustomers();
+    }
+
+    public Customer getCustomer(int currentRowNumber) {
+        return dataBase.listOfCustomers().get(currentRowNumber - 1);
+    }
+
+    public void updateCustomer(int customerID, int carID) {
+        dataBase.updateCustomer(customerID, carID);
     }
 }

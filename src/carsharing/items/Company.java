@@ -1,7 +1,7 @@
 package carsharing.items;
 
 public class Company {
-
+    
     private int ID;
     private String name;
 
@@ -13,6 +13,8 @@ public class Company {
     public int getID() {
         return ID;
     }
+
+
 
     public String getName() {
         return name;

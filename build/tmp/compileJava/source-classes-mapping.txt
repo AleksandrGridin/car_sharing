@@ -4,11 +4,21 @@ carsharing/items/Company.java
  carsharing.items.Company
 carsharing/items/Car.java
  carsharing.items.Car
-carsharing/dao/DataBase.java
- carsharing.dao.DataBase
-carsharing/Menu.java
- carsharing.Menu
 carsharing/Main.java
  carsharing.Main
 carsharing/dao/DataBaseUtil.java
  carsharing.dao.DataBaseUtil
+carsharing/menu/MenuCustomer.java
+ carsharing.menu.MenuCustomer
+carsharing/items/Customer.java
+ carsharing.items.Customer
+carsharing/dao/DataBase.java
+ carsharing.dao.DataBase
+carsharing/menu/MainMenu.java
+ carsharing.menu.MainMenu
+carsharing/menu/MenuCompany.java
+ carsharing.menu.MenuCompany
+carsharing/menu/ManageMenu.java
+ carsharing.menu.ManageMenu
+carsharing/menu/Menu.java
+ carsharing.menu.Menu
